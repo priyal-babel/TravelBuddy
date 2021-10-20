@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Landing extends StatefulWidget {
+class Login extends StatefulWidget {
   @override
-  _LandingState createState() => _LandingState();
+  _Login createState() => _Login();
 }
 
-class _LandingState extends State<Landing> {
+class _Login extends State<Login> {
   @override
   Widget build(BuildContext context) {
     // Figma Flutter Generator Iphone11prox2Widget - FRAME
