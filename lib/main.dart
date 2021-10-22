@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'Home.dart';
-import 'landing.dart';
+import 'login.dart';
 
 void main() {
-  runApp(Landing());
+  runApp(MaterialApp(
+    home: Scaffold(body: Login()),
+  ));
 }

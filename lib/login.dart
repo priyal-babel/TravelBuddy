@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -8,137 +9,41 @@ class Login extends StatefulWidget {
 class _Login extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    // Figma Flutter Generator Iphone11prox2Widget - FRAME
-
+    Size size = MediaQuery.of(context).size;
     return Container(
-        width: 375,
-        height: 812,
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(255, 255, 255, 1),
-        ),
-        child: Stack(children: <Widget>[
+      height: size.height,
+      width: double.infinity,
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
           Positioned(
-              top: 328,
-              left: 57,
+              top: 0,
+              left: 0,
               child: Container(
-                  width: 262,
-                  height: 43,
+                  width: size.width,
+                  height: size.height * 0.5,
+                  decoration: BoxDecoration(
+                    color: Constants.lightBlue,
+                  ),
+                  child: Positioned(
+                    top: size.height * 0.25,
+                    child: Image.asset("images/logo.png"),
+                  ))),
+          Positioned(
+              top: size.height * 0.4,
+              left: 0,
+              child: Container(
+                  width: size.width,
+                  height: size.height * 0.6,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5),
-                      bottomRight: Radius.circular(5),
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, 0.25),
-                          offset: Offset(0, 4),
-                          blurRadius: 4)
-                    ],
                     color: Color.fromRGBO(255, 255, 255, 1),
-                    border: Border.all(
-                      color: Color.fromRGBO(97, 192, 196, 1),
-                      width: 1,
-                    ),
                   ))),
-          Positioned(
-              top: 397,
-              left: 56,
-              child: Container(
-                  width: 262,
-                  height: 43,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      topRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5),
-                      bottomRight: Radius.circular(5),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, 0.25),
-                          offset: Offset(0, 4),
-                          blurRadius: 4)
-                    ],
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                    border: Border.all(
-                      color: Color.fromRGBO(97, 192, 196, 1),
-                      width: 1,
-                    ),
-                  ))),
-          Positioned(
-              top: 407,
-              left: 74,
-              child: Text(
-                'Password',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: Color.fromRGBO(145, 137, 137, 1),
-                    fontFamily: 'Roboto',
-                    fontSize: 17,
-                    letterSpacing:
-                        0 /*percentages not used in flutter. defaulting to zero*/,
-                    fontWeight: FontWeight.normal,
-                    height: 1),
-              )),
-          Positioned(
-              top: 338,
-              left: 75,
-              child: Text(
-                'Email',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: Color.fromRGBO(145, 137, 137, 1),
-                    fontFamily: 'Roboto',
-                    fontSize: 17,
-                    letterSpacing:
-                        0 /*percentages not used in flutter. defaulting to zero*/,
-                    fontWeight: FontWeight.normal,
-                    height: 1),
-              )),
-          Positioned(
-              top: 495,
-              left: 159,
-              child: Text(
-                'LOGIN',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 1),
-                    fontFamily: 'Tienne',
-                    fontSize: 17,
-                    letterSpacing:
-                        0 /*percentages not used in flutter. defaulting to zero*/,
-                    fontWeight: FontWeight.normal,
-                    height: 1),
-              )),
-          Positioned(
-              top: 154,
-              left: 85,
-              child: Container(
-                  width: 204,
-                  height: 173,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(
-                            'images/Blackandyellowcartretaillogo21.png'),
-                        fit: BoxFit.fitWidth),
-                  ))),
-          Positioned(
-              top: 539,
-              left: 74,
-              child: Text(
-                'First time? Register now!',
-                textAlign: TextAlign.left,
-                style: TextStyle(
-                    color: Color.fromRGBO(0, 0, 0, 1),
-                    fontFamily: 'Roboto',
-                    fontSize: 18,
-                    letterSpacing:
-                        0 /*percentages not used in flutter. defaulting to zero*/,
-                    fontWeight: FontWeight.normal,
-                    height: 1),
-              )),
-        ]));
+        ],
+      ),
+    );
   }
 }
