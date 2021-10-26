@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'constants.dart';
+import 'package:flutter/gestures.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -27,7 +29,10 @@ class _Login extends State<Login> {
                   ),
                   child: Positioned(
                     top: size.height * 0.25,
-                    child: Image.asset("images/logo.png"),
+                    child: Image.asset(
+                      "images/logo.png",
+                      scale: 1.75,
+                    ),
                   ))),
           Positioned(
               top: size.height * 0.4,
@@ -42,6 +47,68 @@ class _Login extends State<Login> {
                     ),
                     color: Color.fromRGBO(255, 255, 255, 1),
                   ))),
+          Positioned(
+              top: size.height * 0.75,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                    primary: Constants.lightBlue,
+                    onPrimary: Colors.black,
+                    side: BorderSide(
+                      width: 2.0,
+                      color: (Constants.darkBlue),
+                    )),
+                onPressed: () {},
+                child: Text("LOGIN"),
+              )),
+          Positioned(
+              top: size.height * 0.5,
+              child: ConstrainedBox(
+                constraints: BoxConstraints.tightFor(width: 300, height: 50),
+                child: Material(
+                    elevation: 10,
+                    child: TextField(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Constants.darkBlue, width: 2)),
+                          hintText: "Email"),
+                    )),
+              )),
+          Positioned(
+              top: size.height * 0.6,
+              child: ConstrainedBox(
+                constraints: BoxConstraints.tightFor(width: 300, height: 50),
+                child: Material(
+                  elevation: 10.0,
+                  child: TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: Constants.darkBlue, width: 2)),
+                        hintText: "Password"),
+                  ),
+                ),
+              )),
+          Positioned(
+              top: size.height * 0.83,
+              child: RichText(
+                text: TextSpan(children: <TextSpan>[
+                  TextSpan(
+                      text: "Don't have an account? ",
+                      style: TextStyle(color: Colors.black, fontSize: 15)),
+                  TextSpan(
+                      text: "Sign Up",
+                      style: TextStyle(color: Constants.darkBlue, fontSize: 15),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          print('Working');
+                        }),
+                ]),
+              )),
         ],
       ),
     );
