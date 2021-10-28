@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -151,17 +152,14 @@ class _MyHomePageState extends State<MyHomePage> {
           ))
         ],
       ),
-      RaisedButton(
-        onPressed: () {
-          setState(() {
-            istapped = 'UPLOAD ID';
-          });
-        },
-        padding: EdgeInsets.all(20),
-        textColor: Colors.white,
-        color: Color(0xff61c0c4),
-        child: new Text("UPLOAD ID",
-            style: TextStyle(fontWeight: FontWeight.bold)),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(20),
+          primary: Color(0xff61c0c4),
+          onPrimary: Colors.white,
+        ),
+        onPressed: () {},
+        child: Text("UPLOAD ID", style: TextStyle(fontWeight: FontWeight.bold)),
       ),
       Padding(
         padding: new EdgeInsets.only(left: 22, top: 9, right: 300),
@@ -185,17 +183,14 @@ class _MyHomePageState extends State<MyHomePage> {
           )),
       Padding(
         padding: EdgeInsets.only(top: 12, bottom: 22),
-        child: RaisedButton(
-          onPressed: () {
-            setState(() {
-              istapped = 'UPLOAD ID';
-            });
-          },
-          padding: EdgeInsets.all(20),
-          textColor: Colors.white,
-          color: Color(0xff61c0c4),
-          child: new Text("UPLOAD ID",
-              style: TextStyle(fontWeight: FontWeight.bold)),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.all(20),
+            primary: Color(0xff61c0c4),
+            onPrimary: Colors.white,
+          ),
+          onPressed: () {},
+          child: Text("SIGN UP", style: TextStyle(fontWeight: FontWeight.bold)),
         ),
       )
     ])));
