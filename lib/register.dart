@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'constants.dart';
 
 
-class MyApp extends StatelessWidget {
+class SignUp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -17,26 +18,27 @@ class MyApp extends StatelessWidget {
             title:
                 Text(appTitle, style: TextStyle(fontWeight: FontWeight.bold)),
             backgroundColor: Color(0xff61c0c4)),
-        body: MyHomePage(),
+        body: Register(),
       ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class Register extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _Register createState() => _Register();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _Register extends State<Register> {
   String istapped = 'UPLOAD ID';
   @override
   Widget build(BuildContext context) {
+  Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: new SingleChildScrollView(
-            child: new Column(children: <Widget>[
-      Padding(
-        padding: new EdgeInsets.only(left: 22, top: 22, right: 179),
+        child: new Column(children: <Widget>[
+      Positioned(
+        top: 100,
         child: new Text(
           "Personal Information",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -51,7 +53,8 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(0xff61c0c4), width: 2)),
+                    borderSide: BorderSide(
+                                    color: Constants.darkBlue, width: 2)),
                 labelText: 'First Name',
               ),
             ),
