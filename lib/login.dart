@@ -32,12 +32,9 @@ class _Login extends State<Login> {
                       decoration: BoxDecoration(
                         color: Constants.lightBlue,
                       ),
-                      child: Positioned(
-                        top: size.height * 0.25,
-                        child: Image.asset(
-                          "images/logo.png",
-                          scale: 1.75,
-                        ),
+                      child: Image.asset(
+                        "images/logo.png",
+                        scale: 1.75,
                       ))),
               Positioned(
                   top: size.height * 0.4,

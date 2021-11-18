@@ -18,10 +18,10 @@ class CustomListTile extends StatelessWidget {
             children: <Widget>[
               Icon(icon),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(12.0),
                 child: Text(
                   title,
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 20),
                 ),
               )
             ],
@@ -40,6 +40,7 @@ class Menu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      elevation: 10,
       child: ListView(
         children: <Widget>[
           DrawerHeader(
@@ -64,7 +65,9 @@ class Menu extends StatelessWidget {
           ),
           CustomListTile(icon, name, onTap),
           CustomListTile(Icons.person_outlined, 'Profile', () {}),
-          CustomListTile(Icons.logout_outlined, 'Sign Out', () {}),
+          CustomListTile(Icons.logout_outlined, 'Sign Out', () {
+            Navigator.pushNamed(context, '/login');
+          }),
         ],
       ),
     );
