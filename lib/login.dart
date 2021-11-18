@@ -65,10 +65,7 @@ class _Login extends State<Login> {
                           color: (Constants.darkBlue),
                         )),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return Home();
-                      }));
+                      Navigator.pushNamed(context, '/home');
                     },
                     child: Text("LOGIN"),
                   )),

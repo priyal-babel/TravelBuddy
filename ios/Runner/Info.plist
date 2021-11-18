@@ -40,6 +40,14 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Needed to access location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Needed to access location</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Needed to access location</string>
+	<key>UIBackgroundModes</key>
+	<string>location</string>
 	<false/>
 </dict>
 </plist>

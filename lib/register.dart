@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 
-
 class SignUp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -33,10 +32,10 @@ class _Register extends State<Register> {
   String istapped = 'UPLOAD ID';
   @override
   Widget build(BuildContext context) {
-  Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return Scaffold(
         body: new SingleChildScrollView(
-        child: new Column(children: <Widget>[
+            child: new Column(children: <Widget>[
       Positioned(
         top: 100,
         child: new Text(
@@ -53,8 +52,8 @@ class _Register extends State<Register> {
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                                    color: Constants.darkBlue, width: 2)),
+                    borderSide:
+                        BorderSide(color: Constants.darkBlue, width: 2)),
                 labelText: 'First Name',
               ),
             ),
