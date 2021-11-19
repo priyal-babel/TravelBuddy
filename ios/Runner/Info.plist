@@ -48,6 +48,10 @@
 	<string>Needed to access location</string>
 	<key>UIBackgroundModes</key>
 	<string>location</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<String>Need access to gallery</String>
+	<key>NSCameraUsageDescription</key>
+	<String>Need access to camera</String>
 	<false/>
 </dict>
 </plist>

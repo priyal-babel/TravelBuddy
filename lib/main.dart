@@ -21,7 +21,7 @@ class Main extends StatelessWidget {
         '/userDetails': (context) => UserDetails(),
         '/home': (context) => Home(),
       },
-      home: SafeArea(child: Scaffold(body: Landing())),
+      home: SafeArea(child: Scaffold(body: SignUp())),
     );
   }
 }
