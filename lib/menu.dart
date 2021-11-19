@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 
 class CustomListTile extends StatelessWidget {
-  IconData icon;
-  String title;
-  VoidCallback onTap;
+  final IconData icon;
+  final String title;
+  final VoidCallback onTap;
 
   CustomListTile(this.icon, this.title, this.onTap);
 
@@ -31,9 +31,9 @@ class CustomListTile extends StatelessWidget {
 }
 
 class Menu extends StatelessWidget {
-  IconData icon;
-  String name;
-  VoidCallback onTap;
+  final IconData icon;
+  final String name;
+  final VoidCallback onTap;
 
   Menu(this.icon, this.name, this.onTap);
 

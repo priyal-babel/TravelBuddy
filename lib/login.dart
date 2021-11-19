@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'constants.dart';
 import 'package:flutter/gestures.dart';
-import 'home.dart';
 
 class Login extends StatefulWidget {
   @override
