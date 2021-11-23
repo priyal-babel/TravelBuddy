@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'constants.dart';
 import 'package:flutter/gestures.dart';
+import 'Services/AuthenticationService.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -9,6 +10,10 @@ class Login extends StatefulWidget {
 }
 
 class _Login extends State<Login> {
+    final AuthenticationService _auth = AuthenticationService();
+
+  TextEditingController _emailContoller = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -61,7 +66,8 @@ class _Login extends State<Login> {
                           color: (Constants.darkBlue),
                         )),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      signInUser();
+                      // Navigator.pushNamed(context, '/home');
                     },
                     child: Text("LOGIN"),
                   )),
@@ -73,6 +79,7 @@ class _Login extends State<Login> {
                     child: Material(
                         elevation: 10,
                         child: TextField(
+                           controller: _emailContoller,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
@@ -90,6 +97,7 @@ class _Login extends State<Login> {
                       elevation: 10.0,
                       child: TextField(
                         obscureText: true,
+                        controller: _passwordController,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             enabledBorder: OutlineInputBorder(
@@ -121,5 +129,16 @@ class _Login extends State<Login> {
         ),
       ),
     ));
+  }
+
+  Future<void> signInUser() async {
+        dynamic authResult = await _auth.loginUser(_emailContoller.text, _passwordController.text);
+    if (authResult == null) {
+      print('Sign in error. could not be able to login');
+    } else {
+      _emailContoller.clear();
+      _passwordController.clear();
+      Navigator.pushNamed(context, '/home');
+    }
   }
 }

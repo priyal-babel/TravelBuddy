@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'Services/AuthenticationService.dart';
 
 class CustomListTile extends StatelessWidget {
   final IconData icon;
@@ -31,6 +32,8 @@ class CustomListTile extends StatelessWidget {
 }
 
 class Menu extends StatelessWidget {
+  final AuthenticationService _auth = AuthenticationService();
+
   final IconData icon;
   final String name;
   final VoidCallback onTap;
@@ -65,8 +68,11 @@ class Menu extends StatelessWidget {
           ),
           CustomListTile(icon, name, onTap),
           CustomListTile(Icons.person_outlined, 'Profile', () {}),
-          CustomListTile(Icons.logout_outlined, 'Sign Out', () {
-            Navigator.pushNamed(context, '/login');
+          CustomListTile(Icons.logout_outlined, 'Sign Out', () async {
+            await _auth.signOut().then((result) {
+              Navigator.pushNamed(context, '/login');
+            });
+            // Navigator.pushNamed(context, '/login');
           }),
         ],
       ),
