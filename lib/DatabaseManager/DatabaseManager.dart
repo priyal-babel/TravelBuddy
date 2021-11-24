@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DatabaseManager {
   final CollectionReference profileList =
       FirebaseFirestore.instance.collection('profileInfo');
+  final CollectionReference traveldetails =
+      FirebaseFirestore.instance.collection('traveldetails');
 
   Future<void> createUserData(
       String fname,
@@ -29,6 +31,14 @@ class DatabaseManager {
       'dob': dob,
       'profileurl': profileurl,
       'idurl': idurl
+    });
+  }
+
+  Future<void> details(String from, String to, int mode, String Uid) async {
+    return await traveldetails.doc(Uid).set({
+      'from': from,
+      'to': to,
+      'mode': mode,
     });
   }
 }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,6 +13,11 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+  final _key = GlobalKey<FormState>();
+
+  TextEditingController _from = TextEditingController();
+  TextEditingController _to = TextEditingController();
+
   GoogleMapController? _controller;
   Location currentLocation = Location();
   Set<Marker> _markers = {};
@@ -40,6 +46,11 @@ class _Home extends State<Home> {
     setState(() {
       getLocation();
     });
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    if (user != null) {
+      final uid = user.uid;
+    }
   }
 
   @override
@@ -56,176 +67,202 @@ class _Home extends State<Home> {
           automaticallyImplyLeading: false),
       body: WillPopScope(
         onWillPop: () => Future.value(false),
-        child: Stack(
-          children: <Widget>[
-            Container(
-              height: size.height,
-              width: size.width,
-              child: GoogleMap(
-                myLocationEnabled: false,
-                zoomControlsEnabled: false,
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(19.134070, 72.8303),
-                  zoom: 12.0,
-                ),
-                onMapCreated: (GoogleMapController controller) {
-                  _controller = controller;
-                },
-                markers: _markers,
-              ),
-            ),
-            Positioned(
-                top: size.height * 0.05,
-                child: Padding(
-                  padding:
-                      EdgeInsets.only(left: width * 0.05, right: width * 0.05),
-                  child: Column(
-                    children: <Widget>[
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(right: 10.0),
-                              child: Icon(Icons.my_location),
-                            ),
-                            ConstrainedBox(
-                              constraints: BoxConstraints.tightFor(
-                                  width: width * 0.8, height: 40),
-                              child: Material(
-                                elevation: 10.0,
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.all(10.0),
-                                      border: OutlineInputBorder(),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Constants.darkBlue,
-                                              width: 2)),
-                                      hintText: "From..."),
-                                ),
-                              ),
-                            )
-                          ]),
-                      Container(
-                        width: width * 0.89,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Icon(Icons.more_vert_outlined),
-                          ],
-                        ),
-                      ),
-                      Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
-                                child:
-                                    Icon(Icons.location_on_outlined, size: 30)),
-                            ConstrainedBox(
-                              constraints: BoxConstraints.tightFor(
-                                  width: width * 0.8, height: 40),
-                              child: Material(
-                                elevation: 10.0,
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.all(10.0),
-                                      border: OutlineInputBorder(),
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Constants.darkBlue,
-                                              width: 2)),
-                                      hintText: "To..."),
-                                ),
-                              ),
-                            )
-                          ]),
-                    ],
+        child: Form(
+          key: _key,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                height: size.height,
+                width: size.width,
+                child: GoogleMap(
+                  myLocationEnabled: false,
+                  zoomControlsEnabled: false,
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(19.134070, 72.8303),
+                    zoom: 12.0,
                   ),
-                )),
-            Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                    width: width,
-                    color: Colors.white,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller = controller;
+                  },
+                  markers: _markers,
+                ),
+              ),
+              Positioned(
+                  top: size.height * 0.05,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: width * 0.05, right: width * 0.05),
+                    child: Column(
                       children: <Widget>[
-                        ToggleButtons(
-                          fillColor: Constants.lightBlue,
-                          selectedBorderColor: Constants.darkBlue,
-                          renderBorder: false,
-                          children: <Widget>[
-                            Container(
-                              width: width / 6,
-                              child: Icon(
-                                Icons.directions_car_outlined,
-                                size: 30,
+                        Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Icon(Icons.my_location),
                               ),
-                            ),
-                            Container(
-                              width: width / 6,
-                              child: Icon(
-                                Icons.directions_walk_outlined,
-                                size: 30,
-                              ),
-                            ),
-                            Container(
-                              width: width / 6,
-                              child: Icon(
-                                Icons.directions_bus_outlined,
-                                size: 30,
-                              ),
-                            ),
-                            Container(
-                              width: width / 6,
-                              child: Icon(
-                                Icons.directions_bike_outlined,
-                                size: 30,
-                              ),
-                            ),
-                            Container(
-                              width: width / 6,
-                              child: Icon(
-                                Icons.train_outlined,
-                                size: 30,
-                              ),
-                            ),
-                          ],
-                          onPressed: (int index) {
-                            setState(() {
-                              for (int buttonIndex = 0;
-                                  buttonIndex < isSelected.length;
-                                  buttonIndex++) {
-                                if (buttonIndex == index) {
-                                  isSelected[buttonIndex] = true;
-                                } else {
-                                  isSelected[buttonIndex] = false;
-                                }
-                              }
-                            });
-                          },
-                          isSelected: isSelected,
+                              ConstrainedBox(
+                                constraints: BoxConstraints.tightFor(
+                                    width: width * 0.8, height: 40),
+                                child: Material(
+                                  elevation: 10.0,
+                                  child: TextFormField(
+                                    controller: _from,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Enter From location';
+                                      } else
+                                        return null;
+                                    },
+                                    decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(10.0),
+                                        border: OutlineInputBorder(),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Constants.darkBlue,
+                                                width: 2)),
+                                        hintText: "From..."),
+                                  ),
+                                ),
+                              )
+                            ]),
+                        Container(
+                          width: width * 0.89,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.more_vert_outlined),
+                            ],
+                          ),
                         ),
-                        ToggleButtons(
-                          children: <Widget>[
-                            Container(
-                                width: width / 6 - 2,
-                                child: Icon(Icons.navigate_next_outlined))
-                          ],
-                          onPressed: (int index) {
-                            Navigator.pushNamed(context, '/userDetails');
-                          },
-                          isSelected: submit,
-                        )
+                        Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                  padding: const EdgeInsets.only(right: 8.0),
+                                  child: Icon(Icons.location_on_outlined,
+                                      size: 30)),
+                              ConstrainedBox(
+                                constraints: BoxConstraints.tightFor(
+                                    width: width * 0.8, height: 40),
+                                child: Material(
+                                  elevation: 10.0,
+                                  child: TextFormField(
+                                    controller: _to,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return 'Enter To location';
+                                      } else
+                                        return null;
+                                    },
+                                    decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(10.0),
+                                        border: OutlineInputBorder(),
+                                        enabledBorder: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                color: Constants.darkBlue,
+                                                width: 2)),
+                                        hintText: "To..."),
+                                  ),
+                                ),
+                              )
+                            ]),
                       ],
                     ),
-                  ),
-                ]),
-          ],
+                  )),
+              Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      width: width,
+                      color: Colors.white,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ToggleButtons(
+                            fillColor: Constants.lightBlue,
+                            selectedBorderColor: Constants.darkBlue,
+                            renderBorder: false,
+                            children: <Widget>[
+                              Container(
+                                width: width / 6,
+                                child: Icon(
+                                  Icons.directions_car_outlined,
+                                  size: 30,
+                                ),
+                              ),
+                              Container(
+                                width: width / 6,
+                                child: Icon(
+                                  Icons.directions_walk_outlined,
+                                  size: 30,
+                                ),
+                              ),
+                              Container(
+                                width: width / 6,
+                                child: Icon(
+                                  Icons.directions_bus_outlined,
+                                  size: 30,
+                                ),
+                              ),
+                              Container(
+                                width: width / 6,
+                                child: Icon(
+                                  Icons.directions_bike_outlined,
+                                  size: 30,
+                                ),
+                              ),
+                              Container(
+                                width: width / 6,
+                                child: Icon(
+                                  Icons.train_outlined,
+                                  size: 30,
+                                ),
+                              ),
+                            ],
+                            onPressed: (int index) {
+                              setState(() {
+                                for (int buttonIndex = 0;
+                                    buttonIndex < isSelected.length;
+                                    buttonIndex++) {
+                                  if (buttonIndex == index) {
+                                    isSelected[buttonIndex] = true;
+                                  } else {
+                                    isSelected[buttonIndex] = false;
+                                  }
+                                }
+                              });
+                            },
+                            isSelected: isSelected,
+                          ),
+                          ToggleButtons(
+                            children: <Widget>[
+                              Container(
+                                  width: width / 6 - 2,
+                                  child: Icon(Icons.navigate_next_outlined))
+                            ],
+                            onPressed: (int index) {
+                              Navigator.pushNamed(context, '/availability');
+                              int ind = 0;
+                              for (int i = 0; i < isSelected.length; i++) {
+                                if (isSelected[i] == true) {
+                                  ind = i;
+                                }
+                              }
+                              if (_key.currentState!.validate()) {
+                                fromtomode();
+                              }
+                            },
+                            isSelected: submit,
+                          )
+                        ],
+                      ),
+                    ),
+                  ]),
+            ],
+          ),
         ),
       ),
       floatingActionButton: Padding(
@@ -242,5 +279,13 @@ class _Home extends State<Home> {
         ),
       ),
     );
+  }
+
+  void fromtomode() async {
+    dynamic deets =
+        await DatabaseManager().details(_from.text, _to.text, ind, uid);
+    if (deets == null) {
+      print(deets);
+    }
   }
 }
