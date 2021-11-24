@@ -5,6 +5,7 @@ import 'login.dart';
 import 'landing.dart';
 import 'register.dart';
 import 'userDetails.dart';
+import 'available_users.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ class Main extends StatelessWidget {
         '/signup': (context) => SignUp(),
         '/userDetails': (context) => UserDetails(),
         '/home': (context) => Home(),
+        '/availability': (context) => Available(),
       },
       home: SafeArea(child: Scaffold(body: Landing())),
     );
