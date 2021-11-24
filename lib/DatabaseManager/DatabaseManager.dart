@@ -13,6 +13,9 @@ class DatabaseManager {
       String branch,
       String year,
       String bio,
+      DateTime dob,
+      String profileurl,
+      String idurl,
       String Uid) async {
     return await profileList.doc(Uid).set({
       'fname': fname,
@@ -22,7 +25,10 @@ class DatabaseManager {
       'college': college,
       'branch': branch,
       'year': year,
-      'bio': bio
+      'bio': bio,
+      'dob': dob,
+      'profileurl': profileurl,
+      'idurl': idurl
     });
   }
 }

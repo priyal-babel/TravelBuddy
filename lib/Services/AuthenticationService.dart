@@ -14,14 +14,19 @@ class AuthenticationService {
       String branch,
       String password,
       String year,
-      String bio) async {
+      String bio,
+      DateTime dob,
+      String profileurl,
+      String idurl) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      User user = result.user!;
-      await DatabaseManager().createUserData(
-          fname, lname, phone, gender, college, branch, year, bio, user.uid);
-      return user;
+      User? user = result.user;
+      if (user != null) {
+        await DatabaseManager().createUserData(fname, lname, phone, gender,
+            college, branch, year, bio, dob, profileurl, idurl, user.uid);
+        return user;
+      }
     } catch (e) {
       print(e.toString());
     }

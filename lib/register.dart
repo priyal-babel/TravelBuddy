@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'Services/AuthenticationService.dart';
-import 'package:firebase_storage_web/firebase_storage_web.dart';
+
 class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -54,30 +54,51 @@ class _Register extends State<Register> {
   var profileImageFile;
   var idImageFile;
 
-  _openGallery(BuildContext context1, int num) async {
+  var uploadedProfilePic;
+  var uploadedID;
+
+  _openGallery(BuildContext context, int num) async {
     XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (num == 1) {
       this.setState(() {
         profileImageFile = File(picture!.path);
-        uploadImage(profileImageFile);
       });
+      uploadImage(profileImageFile, num);
     } else {
-      idImageFile = File(picture!.path);
+      this.setState(() {
+        idImageFile = File(picture!.path);
+      });
+      uploadImage(idImageFile, num);
     }
     Navigator.of(context).pop();
   }
 
-  Future uploadImage(var profileImageFile) async {
+  Future uploadImage(var imageFile, int num) async {
     final _storage = FirebaseStorage.instance;
-    if (profileImageFile != null) {
-      var snapshot = await _storage
-          .ref()
-          .child("folderNane/imageName")
-          .putFile(profileImageFile);
-      var download = snapshot.ref.getDownloadURL();
-      setState(() {
-        var imageURL = download;
-      });
+    if (num == 1) {
+      if (imageFile != null) {
+        var snapshot = await _storage
+            .ref()
+            .child("folderName/$imageFile")
+            .putFile(imageFile);
+        var download = snapshot.ref.getDownloadURL();
+        setState(() {
+          uploadedProfilePic = download;
+        });
+        print(uploadedProfilePic);
+        print(uploadedProfilePic.runtimeType);
+      }
+    } else {
+      if (imageFile != null) {
+        var snapshot = await _storage
+            .ref()
+            .child("folderName/$imageFile")
+            .putFile(imageFile);
+        var download = snapshot.ref.getDownloadURL();
+        setState(() {
+          uploadedID = download;
+        });
+      }
     }
   }
 
@@ -87,8 +108,12 @@ class _Register extends State<Register> {
       this.setState(() {
         profileImageFile = File(picture!.path);
       });
+      uploadImage(profileImageFile, num);
     } else {
-      idImageFile = File(picture!.path);
+      this.setState(() {
+        idImageFile = File(picture!.path);
+      });
+      uploadImage(idImageFile, num);
     }
     Navigator.of(context).pop();
   }
@@ -333,7 +358,7 @@ class _Register extends State<Register> {
                       Flexible(
                         child: new Padding(
                           padding: EdgeInsets.only(
-                              left: 5, right: 20, bottom: 12, top: 9),
+                              left: 5, right: 20, bottom: 15, top: 9),
                           child: Material(
                               elevation: 10,
                               child: InputDecorator(
@@ -357,9 +382,9 @@ class _Register extends State<Register> {
                                       ),
                                       new Spacer(),
                                       InkWell(
-                                          onTap: () => _selectDate(context),
-                                          child:
-                                              Icon(Icons.expand_more_outlined))
+                                        onTap: () => _selectDate(context),
+                                        child: Icon(Icons.expand_more_outlined),
+                                      )
                                     ],
                                   ),
                                 ),
@@ -677,7 +702,10 @@ class _Register extends State<Register> {
         _branchController.text,
         _passwordController1.text,
         _yearController.text,
-        _bioController.text);
+        _bioController.text,
+        selectedDate.toLocal(),
+        await uploadedProfilePic,
+        await uploadedID);
     // dynamic result = await _auth.createNewUser(
     //     _emailController.text, _passwordController.text);
 
@@ -698,7 +726,7 @@ class _Register extends State<Register> {
       _yearController.clear();
       _bioController.clear();
       // Navigator.of(context).pushReplacementNamed('/login');
-      // Navigator.pushNamed(context, '/login');
+      Navigator.pushNamed(context, '/login');
     }
   }
 }

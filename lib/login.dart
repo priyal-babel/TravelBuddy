@@ -10,7 +10,7 @@ class Login extends StatefulWidget {
 }
 
 class _Login extends State<Login> {
-    final AuthenticationService _auth = AuthenticationService();
+  final AuthenticationService _auth = AuthenticationService();
 
   TextEditingController _emailContoller = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -66,7 +66,7 @@ class _Login extends State<Login> {
                           color: (Constants.darkBlue),
                         )),
                     onPressed: () {
-                      signInUser();
+                      signInUser(context);
                       // Navigator.pushNamed(context, '/home');
                     },
                     child: Text("LOGIN"),
@@ -79,7 +79,7 @@ class _Login extends State<Login> {
                     child: Material(
                         elevation: 10,
                         child: TextField(
-                           controller: _emailContoller,
+                          controller: _emailContoller,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
@@ -131,10 +131,25 @@ class _Login extends State<Login> {
     ));
   }
 
-  Future<void> signInUser() async {
-        dynamic authResult = await _auth.loginUser(_emailContoller.text, _passwordController.text);
+  Future<void> signInUser(BuildContext context) async {
+    dynamic authResult =
+        await _auth.loginUser(_emailContoller.text, _passwordController.text);
     if (authResult == null) {
-      print('Sign in error. could not be able to login');
+      return showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title:
+                  Text('Error', style: TextStyle(fontWeight: FontWeight.bold)),
+              content: Text("Sign in error, could not login."),
+              actions: [
+                new TextButton(
+                  child: const Text("Ok"),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            );
+          });
     } else {
       _emailContoller.clear();
       _passwordController.clear();
