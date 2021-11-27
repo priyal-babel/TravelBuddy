@@ -358,7 +358,7 @@ class _Register extends State<Register> {
                       Flexible(
                         child: new Padding(
                           padding: EdgeInsets.only(
-                              left: 5, right: 20, bottom: 15, top: 9),
+                              left: 5, right: 20, bottom: 5, top: 9),
                           child: Material(
                               elevation: 10,
                               child: InputDecorator(
@@ -372,13 +372,13 @@ class _Register extends State<Register> {
                                           color: Constants.darkBlue, width: 2)),
                                 ),
                                 child: Container(
-                                  height: 16,
+                                  height: 18,
                                   child: Row(
                                     children: <Widget>[
                                       Text(
                                         "${selectedDate.toLocal()}"
                                             .split(' ')[0],
-                                        style: TextStyle(fontSize: 15),
+                                        style: TextStyle(fontSize: 12),
                                       ),
                                       new Spacer(),
                                       InkWell(
@@ -680,7 +680,7 @@ class _Register extends State<Register> {
                       ),
                       onPressed: () {
                         if (_key.currentState!.validate()) {
-                          createUser();
+                          createUser(context);
                         }
                       },
                       child: Text("SIGN UP",
@@ -691,7 +691,7 @@ class _Register extends State<Register> {
                 ]))));
   }
 
-  void createUser() async {
+  Future<void> createUser(BuildContext context) async {
     dynamic result = await _auth.createNewUser(
         _fnameController.text,
         _lnameController.text,
@@ -712,7 +712,7 @@ class _Register extends State<Register> {
     if (result == null) {
       print(result);
     } else {
-      print(result.toString());
+      // print(result.toString());
       _fnameController.clear();
       _lnameController.clear();
       _passwordController1.clear();
@@ -725,8 +725,24 @@ class _Register extends State<Register> {
       _branchController.clear();
       _yearController.clear();
       _bioController.clear();
-      // Navigator.of(context).pushReplacementNamed('/login');
-      Navigator.pushNamed(context, '/login');
+      return showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Success',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              content: Text("User registered successfully."),
+              actions: [
+                new TextButton(
+                  child: const Text("OK"),
+                  onPressed: () => {
+                    Navigator.pop(context),
+                    Navigator.pushNamed(context, '/login')
+                  },
+                ),
+              ],
+            );
+          });
     }
   }
 }
