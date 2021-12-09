@@ -41,4 +41,16 @@ class DatabaseManager {
       'mode': mode,
     });
   }
+
+  // Future getavaiableUsersList() async {
+  
+  //   try {
+  //     await traveldetails.get().then((querySnapshot){
+
+  //     }
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return null;
+  //   }
+  // }
 }

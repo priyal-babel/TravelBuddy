@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:travel_buddy/menu.dart';
 
+import 'DatabaseManager/DatabaseManager.dart';
 import 'constants.dart';
 
 class Home extends StatefulWidget {
@@ -13,10 +14,12 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
+  
   final _key = GlobalKey<FormState>();
 
   TextEditingController _from = TextEditingController();
   TextEditingController _to = TextEditingController();
+  // TextEditingController _to = TextEditingController();
 
   GoogleMapController? _controller;
   Location currentLocation = Location();
@@ -46,18 +49,22 @@ class _Home extends State<Home> {
     setState(() {
       getLocation();
     });
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
-    if (user != null) {
-      final uid = user.uid;
-    }
+    
+    // final FirebaseAuth auth = FirebaseAuth.instance;
+    // final User? user = auth.currentUser;
+    // if (user != null) {
+    //   final uid = user.uid;
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
+    
+ 
     Size size = MediaQuery.of(context).size;
     double width = size.width;
     return Scaffold(
+      
       endDrawer: Menu(Icons.home_outlined, 'Home', () {
         Navigator.pushNamed(context, '/home');
       }),
@@ -252,7 +259,7 @@ class _Home extends State<Home> {
                                 }
                               }
                               if (_key.currentState!.validate()) {
-                                fromtomode();
+                                fromtomode(context,ind);
                               }
                             },
                             isSelected: submit,
@@ -281,11 +288,16 @@ class _Home extends State<Home> {
     );
   }
 
-  void fromtomode() async {
-    dynamic deets =
-        await DatabaseManager().details(_from.text, _to.text, ind, uid);
-    if (deets == null) {
-      print(deets);
+  Future<void> fromtomode(BuildContext context,int ind) async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    if (user != null) {
+      final uid = user.uid;
+      await DatabaseManager().details(_from.text, _to.text, ind, uid);
+
+      
     }
+      
+   
   }
 }
