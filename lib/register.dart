@@ -11,7 +11,7 @@ import 'Services/AuthenticationService.dart';
 class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appTitle = 'SIGNUP';
+    final appTitle = 'Sign up';
     return MaterialApp(
       title: appTitle,
       home: Scaffold(
@@ -240,7 +240,7 @@ class _Register extends State<Register> {
                               border: OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Constants.darkBlue, width: 2)),
+                                      color: Constants.darkBlue, width: 1)),
                               labelText: 'First Name',
                             ),
                           ),
@@ -264,7 +264,7 @@ class _Register extends State<Register> {
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Constants.darkBlue, width: 2)),
+                                      color: Constants.darkBlue, width: 1)),
                               labelText: 'Last Name',
                             ),
                           ),
@@ -290,7 +290,7 @@ class _Register extends State<Register> {
                           border: OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Constants.darkBlue, width: 2)),
+                                  color: Constants.darkBlue, width: 1)),
                           labelText: 'Email',
                         ),
                       ),
@@ -305,7 +305,7 @@ class _Register extends State<Register> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
                                 border: Border.all(
-                                    color: Constants.darkBlue, width: 2)),
+                                    color: Constants.darkBlue, width: 1)),
                             child: Padding(
                               padding: EdgeInsets.only(left: 8.0),
                               child: TextFormField(
@@ -349,7 +349,7 @@ class _Register extends State<Register> {
                               border: OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Constants.darkBlue, width: 2)),
+                                      color: Constants.darkBlue, width: 1)),
                               labelText: 'Gender',
                             ),
                           ),
@@ -369,7 +369,7 @@ class _Register extends State<Register> {
                                       borderRadius: BorderRadius.circular(4)),
                                   enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Constants.darkBlue, width: 2)),
+                                          color: Constants.darkBlue, width: 1)),
                                 ),
                                 child: Container(
                                   height: 18,
@@ -429,7 +429,7 @@ class _Register extends State<Register> {
                           border: OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Constants.darkBlue, width: 2)),
+                                  color: Constants.darkBlue, width: 1)),
                           labelText: 'Name of College',
                         ),
                       ),
@@ -456,7 +456,7 @@ class _Register extends State<Register> {
                               border: OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Constants.darkBlue, width: 2)),
+                                      color: Constants.darkBlue, width: 1)),
                               labelText: 'Branch/Degree',
                             ),
                           ),
@@ -480,7 +480,7 @@ class _Register extends State<Register> {
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Constants.darkBlue, width: 2)),
+                                      color: Constants.darkBlue, width: 1)),
                               labelText: 'Year',
                             ),
                           ),
@@ -502,7 +502,7 @@ class _Register extends State<Register> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
                                 border: Border.all(
-                                    color: Constants.darkBlue, width: 2)),
+                                    color: Constants.darkBlue, width: 1)),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
@@ -532,7 +532,7 @@ class _Register extends State<Register> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
                                 border: Border.all(
-                                    color: Constants.darkBlue, width: 2)),
+                                    color: Constants.darkBlue, width: 1)),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
@@ -588,7 +588,7 @@ class _Register extends State<Register> {
                           border: OutlineInputBorder(),
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
-                                  color: Constants.darkBlue, width: 2)),
+                                  color: Constants.darkBlue, width: 1)),
                           hintText: 'Enter Bio for Profile',
                         ),
                       ),
@@ -634,7 +634,7 @@ class _Register extends State<Register> {
                               border: OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Constants.darkBlue, width: 2)),
+                                      color: Constants.darkBlue, width: 1)),
                               labelText: 'Password',
                             ),
                           ),
@@ -661,7 +661,7 @@ class _Register extends State<Register> {
                             decoration: InputDecoration(
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Constants.darkBlue, width: 2)),
+                                      color: Constants.darkBlue, width: 1)),
                               labelText: 'Confirm password',
                             ),
                           ),
@@ -675,16 +675,21 @@ class _Register extends State<Register> {
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.only(
                             left: 20, right: 20, top: 10, bottom: 10),
-                        primary: Constants.darkBlue,
-                        onPrimary: Colors.white,
+                        primary: Constants.lightBlue,
+                        onPrimary: Colors.black,
+                        side: BorderSide(
+                          width: 1.0,
+                          color: (Constants.darkBlue),
+                        ),
                       ),
                       onPressed: () {
                         if (_key.currentState!.validate()) {
                           createUser(context);
                         }
                       },
-                      child: Text("SIGN UP",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(
+                        "SIGN UP",
+                      ),
                     ),
                   ),
                   Padding(padding: EdgeInsets.all(8.0))

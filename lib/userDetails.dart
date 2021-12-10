@@ -20,7 +20,7 @@ class _UserDetails extends State<UserDetails> {
             icon: Icon(Icons.arrow_back, color: Colors.white),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: Text('USER DETAILS',
+          title: Text('User details',
               style: TextStyle(fontWeight: FontWeight.bold)),
           backgroundColor: Constants.darkBlue),
       body: Stack(

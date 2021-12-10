@@ -21,11 +21,11 @@ class Main extends StatelessWidget {
         '/landing': (context) => Landing(),
         '/login': (context) => Login(),
         '/signup': (context) => SignUp(),
-        '/userDetails': (context) => UserDetails(),
-        '/home': (context) => Home(),
         '/availability': (context) => Available(),
+        '/details': (context) => UserDetails(),
+        '/home': (context) => Home(),
       },
-      home: SafeArea(child: Scaffold(body: Landing())),
+      home: Scaffold(body: Login()),
     );
   }
 }

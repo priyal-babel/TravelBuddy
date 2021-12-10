@@ -62,7 +62,7 @@ class _Login extends State<Login> {
                         primary: Constants.lightBlue,
                         onPrimary: Colors.black,
                         side: BorderSide(
-                          width: 2.0,
+                          width: 1.0,
                           color: (Constants.darkBlue),
                         )),
                     onPressed: () {
@@ -84,7 +84,7 @@ class _Login extends State<Login> {
                               border: OutlineInputBorder(),
                               enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Constants.darkBlue, width: 2)),
+                                      color: Constants.darkBlue, width: 1)),
                               hintText: "Email"),
                         )),
                   )),
@@ -102,7 +102,7 @@ class _Login extends State<Login> {
                             border: OutlineInputBorder(),
                             enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
-                                    color: Constants.darkBlue, width: 2)),
+                                    color: Constants.darkBlue, width: 1)),
                             hintText: "Password"),
                       ),
                     ),

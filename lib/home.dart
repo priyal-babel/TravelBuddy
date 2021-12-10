@@ -14,7 +14,6 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
-  
   final _key = GlobalKey<FormState>();
 
   TextEditingController _from = TextEditingController();
@@ -49,7 +48,7 @@ class _Home extends State<Home> {
     setState(() {
       getLocation();
     });
-    
+
     // final FirebaseAuth auth = FirebaseAuth.instance;
     // final User? user = auth.currentUser;
     // if (user != null) {
@@ -59,12 +58,9 @@ class _Home extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    
- 
     Size size = MediaQuery.of(context).size;
     double width = size.width;
     return Scaffold(
-      
       endDrawer: Menu(Icons.home_outlined, 'Home', () {
         Navigator.pushNamed(context, '/home');
       }),
@@ -127,7 +123,7 @@ class _Home extends State<Home> {
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 color: Constants.darkBlue,
-                                                width: 2)),
+                                                width: 1)),
                                         hintText: "From..."),
                                   ),
                                 ),
@@ -168,7 +164,7 @@ class _Home extends State<Home> {
                                         enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                                 color: Constants.darkBlue,
-                                                width: 2)),
+                                                width: 1)),
                                         hintText: "To..."),
                                   ),
                                 ),
@@ -259,7 +255,7 @@ class _Home extends State<Home> {
                                 }
                               }
                               if (_key.currentState!.validate()) {
-                                fromtomode(context,ind);
+                                fromtomode(context, ind);
                               }
                             },
                             isSelected: submit,
@@ -288,16 +284,12 @@ class _Home extends State<Home> {
     );
   }
 
-  Future<void> fromtomode(BuildContext context,int ind) async {
+  Future<void> fromtomode(BuildContext context, int ind) async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     if (user != null) {
       final uid = user.uid;
       await DatabaseManager().details(_from.text, _to.text, ind, uid);
-
-      
     }
-      
-   
   }
 }
