@@ -23,8 +23,20 @@ class AuthenticationService {
           email: email, password: password);
       User? user = result.user;
       if (user != null) {
-        await DatabaseManager().createUserData(fname, lname, phone, gender,
-            college, branch, year, bio, dob, profileurl, idurl, user.uid);
+        await DatabaseManager().createUserData(
+            fname,
+            lname,
+            phone,
+            gender,
+            college,
+            branch,
+            year,
+            bio,
+            dob,
+            profileurl,
+            idurl,
+            user.uid,
+            email);
         return user;
       }
     } catch (e) {
