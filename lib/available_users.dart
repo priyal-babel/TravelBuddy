@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:travel_buddy/home.dart';
 import 'package:travel_buddy/userDetails.dart';
 import 'constants.dart';
 import 'menu.dart';
@@ -163,7 +164,6 @@ class _AvailableState extends State<Available> {
 
   @override
   void initState() {
-    print("I SAY HIIIIIII");
     super.initState();
     fetchUsers();
   }
@@ -200,8 +200,29 @@ class _AvailableState extends State<Available> {
                 collection
                     .doc(user.uid) // <-- Doc ID to be deleted.
                     .delete() // <-- Delete
-                    .then((_) => print('Deleted'))
-                    .catchError((error) => print('Delete failed: $error'));
+                    .then((_) {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Success',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          content: Text("Journey cancelled."),
+                          actions: [
+                            new TextButton(
+                              child: const Text("OK"),
+                              onPressed: () => {
+                                Navigator.pop(context),
+                                Navigator.of(context).pushAndRemoveUntil(
+                                    new MaterialPageRoute(
+                                        builder: (context) => new Home()),
+                                    (route) => false)
+                              },
+                            ),
+                          ],
+                        );
+                      });
+                }).catchError((error) => print('Delete failed: $error'));
               }
               // Add your onPressed code here!
             },

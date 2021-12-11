@@ -250,9 +250,6 @@ class _Home extends State<Home> {
                                       }
                                     }
                                     if (_key.currentState!.validate()) {
-                                      setState(() {
-                                        isLoading = true;
-                                      });
                                       await fromtomode(context, ind);
                                     }
                                   },
@@ -285,6 +282,9 @@ class _Home extends State<Home> {
   Future<void> fromtomode(BuildContext context, int ind) async {
     try {
       if (_from.text.isNotEmpty && _to.text.isNotEmpty) {
+        setState(() {
+          isLoading = true;
+        });
         final FirebaseAuth auth = FirebaseAuth.instance;
         final User? user = auth.currentUser;
         if (user != null) {

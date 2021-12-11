@@ -43,18 +43,6 @@ class AuthenticationService {
       print(e.toString());
     }
   }
-  // Future createNewUser(String email, String password) async {
-  //   try {
-  //     UserCredential result = await _auth.createUserWithEmailAndPassword(
-  //         email: email, password: password);
-  //     User? user = result.user;
-  //     print(result);
-  //     // await DatabaseManager().createUserData(name, 'Male', 100, user.uid);
-  //     return user;
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
 
   Future loginUser(String email, String password) async {
     try {
