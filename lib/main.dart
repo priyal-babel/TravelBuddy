@@ -25,7 +25,7 @@ class Main extends StatelessWidget {
         '/signup': (context) => SignUp(),
         '/home': (context) => Home(),
       },
-      home: Scaffold(body: Login()),
+      home: Scaffold(body: Landing()),
     );
   }
 }

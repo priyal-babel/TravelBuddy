@@ -151,9 +151,26 @@ class _Login extends State<Login> {
             );
           });
     } else {
-      _emailContoller.clear();
-      _passwordController.clear();
-      Navigator.pushNamed(context, '/home');
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Success',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              content: Text("You have been logged in successfully."),
+              actions: [
+                new TextButton(
+                  child: const Text("OK"),
+                  onPressed: () => {
+                    Navigator.pop(context),
+                    _emailContoller.clear(),
+                    _passwordController.clear(),
+                    Navigator.pushNamed(context, '/home')
+                  },
+                ),
+              ],
+            );
+          });
     }
   }
 }
